@@ -20,6 +20,9 @@ function play(delta)
         case palleteMode:
           palleteUpdate();
         break
+        case circleMode:
+          circleUpdate();
+        break
       }
     }
   }

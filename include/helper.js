@@ -95,7 +95,8 @@ function hitTestRectangle(r1, r2) {
 
 
 // instuctions not included
-function randomInt(min, max) {
+function randomInt(min, max)
+{
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -229,7 +230,9 @@ function cleanUp()
     case palleteMode:
       palleteClean();
     break
-
+    case circleMode:
+      circleClean();
+    break
   }
 }
 
@@ -239,14 +242,19 @@ function changeMode( inputMode )
   switch ( inputMode )
   {
     case baseMode:
-      displayMode = 0;
+      displayMode = baseMode;
       updateFrame = baseFrame;
       baseSetup();
     break
     case palleteMode:
-      displayMode = 1;
+      displayMode = palleteMode;
       updateFrame = palleteFrame;
       palleteSetup();
+    break;
+    case circleMode:
+      displayMode = circleMode;
+      updateFrame = circleFrame;
+      circleSetup();
     break;
   }
   infoDraw();

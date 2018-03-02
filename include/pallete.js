@@ -1,6 +1,8 @@
 function palleteSetup()
 {
   mainScene.addChild(palleteScene)
+  footer.text = "Pallete Generator\nLiam Frappell 2018";
+  darkMode = 0;
   for (let i = 0; i < 8; i++)
   {
     let square = new Graphics();
@@ -30,7 +32,6 @@ function palleteUpdate()
   for (let i = 0; i < 8; i++)
   {
     squares[i].clear();
-
     squares[i].beginFill(hsvToRgb(baseColor, (i/8)*99 + 1, 100)); // BG colour
     if (mobileMode)
     {

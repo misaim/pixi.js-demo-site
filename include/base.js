@@ -4,7 +4,8 @@ squares = [];
 function baseSetup()
 {
   mainScene.addChild(baseScene)
-  console.log("Base Setup Time");
+  footer.text = "Gradient Pixeliser\nLiam Frappell 2018"
+  darkMode = 0;
   for (let i = 0; i < 64; i++)
   {
     let square = new Graphics();

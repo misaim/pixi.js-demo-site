@@ -24,8 +24,8 @@ let app = new Application({
 );
 
 // Constants, or as good as you can have in javascript...
-let baseMode = 0, palleteMode = 1;
-let baseFrame = 4, palleteFrame = 30;
+let baseMode = 0, palleteMode = 1, circleMode = 2;
+let baseFrame = 4, palleteFrame = 30, circleFrame = 5;
 
 // Allow canvas to take up entire screen, requires css trick to work (See index.html)
 app.renderer.view.style.position = "absolute";
@@ -44,7 +44,7 @@ loader
 
 // Global state based variables (state required for pixi.js)
 let state, displayMode = 1, counter = 0, mobileMode = 0, runningStatus = 1;
-let darkmode = 0;
+let darkMode = 0;
 let mainScene;
 // How often (In frames) each demo needs to update.
 let updateFrame = 30;
@@ -64,6 +64,7 @@ function setup()
   // Various containers for a variety of display modes - add new ones here
   baseScene = new Container();
   palleteScene = new Container();
+  circleScene = new Container();
 
   //Capture the keyboard arrow keys
   let left = keyboard(37),
@@ -109,7 +110,7 @@ function setup()
   };
   right.release = function()
   {
-    if (displayMode < 1)
+    if (displayMode < 2)
     {
       runningStatus = 0;
       cleanUp();
@@ -130,7 +131,7 @@ function setup()
   state = play;
 
   // We need to start in a mode TODO make it random
-  changeMode(baseMode);
+  changeMode(circleMode);
   // Draw the cruicial part of the website...
   infoDraw();
 
