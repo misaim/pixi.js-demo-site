@@ -1,7 +1,7 @@
 // Draws the important part of the website - the gray boxes with information.
 
 let headerStyle = new TextStyle({
-  fontFamily: "Arial",
+  fontFamily: "Verdana",
   fontSize: 36,
   fill: "white",
   //stroke: '#000000',
@@ -34,7 +34,7 @@ function infoDraw()
 
   centerBox.visible = false;
   header.visible = false;
-  footer.visible = false;
+  //footer.visible = false;
 
   header.x = window.innerWidth/2 - header.width/2;
   header.y = window.innerHeight/(5);
@@ -46,12 +46,20 @@ function infoDraw()
     centerBox.beginFill(0xFFFFFF);
     centerBox.alpha = 0.7;
     headerStyle.fill = "black";
+
+    modeBox.beginFill(0xFFFFFF);
+    modeBox.alpha = 0.7;
+    footerStyle.fill = "black";
   }
   else
   {
     centerBox.beginFill(0x333333);
     centerBox.alpha = 0.5;
     headerStyle.fill = "white";
+
+    modeBox.beginFill(0x333333);
+    modeBox.alpha = 0.5;
+    footerStyle.fill = "white";
   }
   //centerBox.lineStyle(6, 0x000000, 1);
   centerBox.drawRect(0, 0, window.innerWidth - (window.innerWidth*0.4), (window.innerHeight*0.4));
@@ -59,26 +67,29 @@ function infoDraw()
   centerBox.x = window.innerWidth/2 - centerBox.width/2;
   centerBox.y = 0.1 * window.innerHeight;
 
-  if (!mobileMode)
-  {
-    footer.visible = true;
+  modeBox.drawRect(0, 0, footer.width + 20, footer.height + 10);
+  modeBox.endFill();
+  modeBox.x = 15;
+  modeBox.y = window.innerHeight - modeBox.height - 15;
 
-    if (darkMode)
-    {
-      modeBox.beginFill(0xFFFFFF);
-      modeBox.alpha = 0.7;
-      footerStyle.fill = "black";
-    }
-    else
-    {
-      modeBox.beginFill(0x333333);
-      modeBox.alpha = 0.5;
-      footerStyle.fill = "white";
-    }
+  if (mobileMode)
+  {
+    //footer.visible = true;
+    //modeBox
     //modeBox.lineStyle(6, 0x000000, 1);
-    modeBox.drawRect(0, 0, footer.width + 20, footer.height + 10);
-    modeBox.endFill();
-    modeBox.x = 15;
-    modeBox.y = window.innerHeight - modeBox.height - 15;
+    modeBox.width = window.innerWidth - 30;
+
+
+
+  }
+  else
+  {
+    // Sets up link in desktop version
+    modeBox.interactive = true;
+    modeBox.buttonMode = true;
+    modeBox.on("click", function(e)
+    {
+      window.open("https://github.com/misaim/pixi.js-demo-site", "_blank");
+    });
   }
 }

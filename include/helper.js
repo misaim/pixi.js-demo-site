@@ -100,6 +100,7 @@ function randomInt(min, max)
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
 //Sets up keyboard interupts - taken from pixi.js github
 function keyboard(keyCode) {
   var key = {};

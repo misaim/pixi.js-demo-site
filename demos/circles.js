@@ -21,13 +21,13 @@ let drawPointX = 0, drawPointY = 0;
 
 let circleDemo =
 {
-  updateFrame: 5,
+  updateFrame: 2,
 
   demoSetup: function()
   {
     // This isn't called for some reason. TODO research why
     this.demoClean();
-    
+
     mainScene.addChild(demoScene);
     demoScene.addChild(circleOne);
     demoScene.addChild(circleTwo);
@@ -39,6 +39,10 @@ let circleDemo =
     app.renderer.backgroundColor = 0x0F0020;
     darkMode = 1;
     this.randomCircle();
+    for (let i = 0; i < 200; i++)
+    {
+      this.demoUpdate();
+    }
   },
 
   demoUpdate: function()

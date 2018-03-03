@@ -20,7 +20,7 @@ Links all demo.js files. Demos appear in the order they are linked.
 Follow a simple structure:
 * Demo-Specific Global variables
 * demoSetup();, to initialize the any variables and attach demo container to main container
-* demoUpdate();, called every x frames, where x is demoFrame global variable.
+* demoUpdate();, called every *updateFrame* frames, set in the demo structure.
 * demoClean();, used to deallocate any used variables (To maintain performance when swapping demo's)
 
 Check out demos/example.js for more information!

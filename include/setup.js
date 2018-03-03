@@ -135,7 +135,7 @@ function setup()
 
   //Set the pixi.js state
   state = play;
-
+  currentDemo = randomInt(0, demoMode.length-1);
   // We need to start in a mode TODO make it random
   demoMode[currentDemo].demoSetup();
   infoDraw();
