@@ -23,9 +23,7 @@ let app = new Application({
   }
 );
 
-// Constants, or as good as you can have in javascript...
-let baseMode = 0, palleteMode = 1, circleMode = 2;
-let baseFrame = 4, palleteFrame = 30, circleFrame = 5;
+
 
 // Allow canvas to take up entire screen, requires css trick to work (See index.html)
 app.renderer.view.style.position = "absolute";
@@ -38,16 +36,20 @@ document.body.appendChild(app.view);
 app.renderer.backgroundColor = 0xCC6633;
 
 // For some reason the app hangs when this is removed - the file doesn't exit though.
+
 loader
   .add("images/treasureHunter.json")
   .load(setup);
 
 // Global state based variables (state required for pixi.js)
-let state, displayMode = 1, counter = 0, mobileMode = 0, runningStatus = 1;
+let state, currentDemo = 0, counter = 0, mobileMode = 0, runningStatus = 1;
 let darkMode = 0;
 let mainScene;
+let demoScene;
+let demoMode = [];
+
 // How often (In frames) each demo needs to update.
-let updateFrame = 30;
+//let updateFrame = 30;
 
 // we could have proper mobile handling but this works for now.
 if (window.innerWidth < window.innerHeight)
@@ -62,9 +64,7 @@ function setup()
   app.stage.addChild(mainScene);
 
   // Various containers for a variety of display modes - add new ones here
-  baseScene = new Container();
-  palleteScene = new Container();
-  circleScene = new Container();
+  demoScene = new Container();
 
   //Capture the keyboard arrow keys
   let left = keyboard(37),
@@ -77,8 +77,8 @@ function setup()
   rKey.release = function()
   {
     runningStatus = 0;
-    cleanUp();
-    changeMode(displayMode);
+    demoMode[currentDemo].demoClean();
+    demoMode[currentDemo].demoSetup();
     runningStatus = 1;
   }
   //Left arrow key `press` method
@@ -88,11 +88,14 @@ function setup()
   //Left arrow key `release` method
   left.release = function()
   {
-    if (displayMode > 0)
+    if (currentDemo > 0)
     {
       runningStatus = 0;
-      cleanUp();
-      changeMode(displayMode - 1)
+      demoMode[currentDemo].demoClean();
+      mainScene.removeChildren();
+      currentDemo--;
+      demoMode[currentDemo].demoSetup();
+      infoDraw();
       runningStatus = 1;
     }
   };
@@ -110,11 +113,14 @@ function setup()
   };
   right.release = function()
   {
-    if (displayMode < 2)
+    if (currentDemo < demoMode.length-1)
     {
       runningStatus = 0;
-      cleanUp();
-      changeMode(displayMode + 1);
+      demoMode[currentDemo].demoClean();
+      mainScene.removeChildren();
+      currentDemo++;
+      demoMode[currentDemo].demoSetup();
+      infoDraw();
       runningStatus = 1;
     }
   };
@@ -131,10 +137,8 @@ function setup()
   state = play;
 
   // We need to start in a mode TODO make it random
-  changeMode(circleMode);
-  // Draw the cruicial part of the website...
+  demoMode[currentDemo].demoSetup();
   infoDraw();
-
   //Start the pixi.js loop
   app.ticker.add(delta => gameLoop(delta));
 }

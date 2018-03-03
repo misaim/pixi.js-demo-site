@@ -7,26 +7,12 @@ function gameLoop(delta)
 function play(delta)
 {
   counter++;
-  if (counter >= updateFrame)
+  if (counter >= demoMode[currentDemo].updateFrame)
   {
     counter = 0;
     if (runningStatus)
     {
-      switch (displayMode)
-      {
-        case baseMode:
-          baseUpdate()
-        break
-        case palleteMode:
-          palleteUpdate();
-        break
-        case circleMode:
-          circleUpdate();
-        break
-      }
+      demoMode[currentDemo].demoUpdate();
     }
   }
-
-
-
 }

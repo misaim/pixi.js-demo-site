@@ -12,7 +12,9 @@ Contains the main loop - used to call various demo update functions.
 
 ## helper.js
 A large variety of helper functions used throughout multiple demos.
-Includes switch statements to call demoUpdate() and demoClean() functions.
+
+## index.html
+Links all demo.js files. Demos appear in the order they are linked.
 
 ## Demo's:
 Follow a simple structure:
@@ -21,15 +23,15 @@ Follow a simple structure:
 * demoUpdate();, called every x frames, where x is demoFrame global variable.
 * demoClean();, used to deallocate any used variables (To maintain performance when swapping demo's)
 
+Check out demos/example.js for more information!
+
 ## To add a demo:
 1. Create a file, demo.js and link it within index.html
-2. Within setup.js, assign a new demoMode and demoFrame constant, a unique number and how often the demo should update (In frames)
-3. Create a new container aka 'demoScene = new Container();' within setup().
-4. Add setup and clean handlers to the switch statements in helper.js functions cleanUp() and changeMode().
-5. Write your demo ;)
+2. Write your demo ;)
 
 This may change to become automatic one day in the future.
 
 ## Current Demos:
 0. Pixel Gradient - a random color gradient
 1. Pallete generator - Doesn't work very well at the moment...
+2. Circle Draw - Draws random circles. Based off a sweater I saw in a store, beijing 2018.
