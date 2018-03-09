@@ -38,7 +38,8 @@ app.renderer.backgroundColor = 0xCC6633;
 // For some reason the app hangs when this is removed - the file doesn't exit though.
 
 loader
-  .add("images/treasureHunter.json")
+  .add("images/world/1616world.json")
+  //.add("images/1616world.png")
   .load(setup);
 
 // Global state based variables (state required for pixi.js)
@@ -73,12 +74,16 @@ function setup()
       down = keyboard(40),
       rKey = keyboard(82);
 
+
+
   // Reset when user presses r. TODO: make this on press.
   rKey.release = function()
   {
     runningStatus = 0;
     demoMode[currentDemo].demoClean();
+    mainScene.removeChildren();
     demoMode[currentDemo].demoSetup();
+    infoDraw();
     runningStatus = 1;
   }
   //Left arrow key `press` method
@@ -135,7 +140,8 @@ function setup()
 
   //Set the pixi.js state
   state = play;
-  currentDemo = randomInt(0, demoMode.length-1);
+  //currentDemo = randomInt(0, demoMode.length-1);
+  currentDemo = demoMode.length-1;
   // We need to start in a mode TODO make it random
   demoMode[currentDemo].demoSetup();
   infoDraw();

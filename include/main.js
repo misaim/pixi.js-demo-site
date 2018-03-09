@@ -12,7 +12,7 @@ function play(delta)
     counter = 0;
     if (runningStatus)
     {
-      demoMode[currentDemo].demoUpdate();
+      demoMode[currentDemo].demoUpdate(delta);
     }
   }
 }
